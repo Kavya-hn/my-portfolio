@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kavya H N - Portfolio</title>
+
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ===== Reset ===== */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family: 'Roboto', sans-serif; line-height:1.6; background:#121212; color:#eee; }
+
+/* ===== Header ===== */
+header {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px; background:#1f1f1f; color:white; position:fixed; width:100%; top:0; z-index:1000;
+}
+header .logo { font-size:28px; font-weight:bold; cursor:pointer; }
+header nav { display:flex; gap:20px; }
+header nav a { color:white; text-decoration:none; font-weight:500; transition:0.3s; }
+header nav a:hover { color:#f97316; }
+.hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+.hamburger div { width:25px; height:3px; background:white; transition:0.3s; }
+@media(max-width:768px){
+  #about .text { text-align:center; }
+}
+
+/* ===== Sections ===== */
+section { padding:100px 20px 60px; min-height:100vh; }
+section h2 { font-size:36px; text-align:center; margin-bottom:30px; color:#f97316; }
+
+  
+/* ===== Hero / About ===== */
+#about { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:50px; }
+#about .text { flex:1; min-width:300px; }
+#about .text h1 { font-size:50px; margin-bottom:20px; color:#f97316; }
+#about .text p { font-size:18px; max-width:500px; }
+#about .image { flex:1; min-width:300px; }
+#about .image img { width:100%; max-width:400px; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-20px); } }
+
+
+/* ===== HR Section Divider ===== */
+.section-divider {
+  border: none;
+  height: 2px;
+  width: 100%;
+  margin: 40px auto;
+  border-radius: 1px;
+  background: linear-gradient(90deg, rgba(234, 165, 115, 0.8), rgba(147,51,234,0.8), rgba(37,99,235,0.8));
+  box-shadow: 0 0 20px rgba(235, 134, 62, 0.6), 0 0 25px rgba(147,51,234,0.5), 0 0 35px rgba(37,99,235,0.5);
+  opacity: 0;          
+  transform: scaleX(0);  
+  transition: all 1s ease;
+}
+.section-divider.show {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ===== Education ===== */
+.education-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.education-card {
+  background: #1f1f1f;
+  padding: 20px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(249,115,22,0.3);
+  min-width: 250px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(249,115,22,0.6);
+}
+
+.education-card h3 {
+  color: #f97316;
+  margin-bottom: 10px;
+}
+
+.education-card p {
+  margin-bottom: 5px;
+}
+
+
+
+/* ===== Skills ===== */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-container {
+    grid-template-columns: 1fr; /* 1 per row on mobile */
+  }
+}
+.skill-card {
+  background: linear-gradient(145deg, #1f1f1f, #2c2c2c);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  width: 220px;        /* increased width */
+  height: auto;        /* let height adjust */
+  box-shadow: 0 0 10px rgba(249,115,22,0.3);
+  opacity: 0; 
+  transform: translateY(50px) scale(0.8);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 25px rgba(249,115,22,0.7);
+}
+
+.skill-icon img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.skill-icon p {
+  text-align: center; 
+  font-weight: bold;
+  color: #f97316;
+}
+
+.skill-desc {
+  font-size: 13px;
+  color: #ccc;
+  margin-top: 10px;
+  line-height: 1.4;
+  word-wrap: break-word; /* ensures long text wraps inside card */
+}
+
+.skill-card p {
+  margin: 0;
+  font-weight: bold;
+  color: #f97316;
+   width: 120px;
+  text-align: center;
+  align-self: center; 
+}
+
+
+
+
+/* Animation when scrolling into view */
+.skill-card.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.6s ease;
+}
+
+/* Skill Animations */
+.skill-card.animate {
+  animation: popIn 0.6s forwards;
+}
+
+
+/* Pop-in animation when scrolling into view */
+.skill-card.show {
+  animation: popIn 0.6s ease forwards;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translateY(50px) scale(0.8); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Hover effects: lift + scale + glow + gradient + pulse */
+.skill-card:hover {
+  transform: translateY(-10px) scale(1.1);
+  box-shadow: 0 0 15px #3b2210ff, 0 0 30px #f97316, 0 0 45px #f97316;
+  background: linear-gradient(145deg, #f97316, #9333ea);
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: translateY(-10px) scale(1.1); }
+  100% { transform: translateY(-12px) scale(1.12); }
+}
+
+.skill-card img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.skill-card p {
+  margin: 0;
+  font-weight: bold;
+  color: #f97316;
+  text-align: center;
+}
+
+/* ===== Projects ===== */
+.project-section { display:flex; flex-direction:column; gap:50px; }
+.project-card { display:flex; align-items:center; gap:30px; background:#1f1f1f; padding:20px; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.5); opacity:0; transform:translateY(50px); transition:0.8s ease; }
+.project-card img { width:300px; border-radius:10px; }
+.project-card .content { flex:1; }
+.project-card .content h3 { font-size:24px; margin-bottom:10px; color:#f97316; }
+.project-card .content p { margin-bottom:10px; }
+.project-card .content a { color:#f97316; text-decoration:none; font-weight:bold; }
+.project-card.show { opacity:1; transform:translateY(0); }
+
+/* ===== Contact ===== */
+footer {
+  background: #1f1f1f;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+footer h2 {
+  margin-bottom: 20px;
+  color: #f97316;
+}
+footer p {
+  margin: 5px 0;
+}
+.social-icons {
+  display: flex;
+  justify-content: flex-start;
+}
+.social-icons a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.social-icons a:hover {
+  color: #f97316;
+}
+.contact-form {
+  margin-top: 0;
+  width: 100%;
+}
+.contact-form input, .contact-form textarea {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+}
+.contact-form button {
+  padding: 10px 20px;
+  background: #f97316;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.contact-form button:hover {
+  background: #2563eb;
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  #about{ flex-direction:column; text-align:center; }
+  .project-card{ flex-direction:column; }
+ .project-card img { width: 100%; max-width: 300px; }
+
+  header nav{ display:none; flex-direction:column; background:#1f1f1f; position:absolute; top:70px; right:20px; padding:20px; border-radius:10px; }
+  header nav.show{ display:flex; }
+  .hamburger{ display:flex; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">Kavya H N</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="hamburger" id="hamburger">
+    <div></div><div></div><div></div>
+  </div>
+</header>
+
+<!-- About -->
+<section id="about">
+  <div class="text">
+    <h1 id="fullstack">Full Stack<br> WebDeveloper !...</h1>
+    <p>Software development enthusiast with hands-on experience in web, desktop, and academic projects.
+     Eager to contribute to innovative projects and grow as a professional in the technology field</p>
+  </div>
+  <div class="image">
+    <img src="https://img.freepik.com/premium-photo/closeup-code-editor-displaying-lines-programming-code_1314467-91391.jpg" alt="Coding Illustration"
+    radius="10px">      
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Education -->
+<section id="education">
+  <h2>Education</h2>
+  <div class="education-container">
+    <div class="education-card">
+      <h3>Bachelor of Engineering (2021-2025)</h3>
+      <p><strong>Branch:</strong> Information Science and Engineering</p>
+      <p><strong>College:</strong> PES Institute of Technology and Management, Shivamogga</p>
+      <p><strong>Percentage:</strong> 82.17%</p>
+    </div>
+    <div class="education-card">
+      <h3>Pre-University Education (2021)</h3>
+      <p><strong>College:</strong> Shree Channamallikarjuna Pre University, Shikaripura</p>
+      <p><strong>Percentage:</strong> 93%</p>
+    </div>
+    <div class="education-card">
+      <h3>SSLC (2019)</h3>
+      <p><strong>Board:</strong> Karnataka Secondary Education Examination Board</p>
+      <p><strong>School:</strong> Shree Channamallikarjuna School, Shikaripura</p>
+      <p><strong>Percentage:</strong> 92.32%</p>
+    </div>
+  </div>
+</section>
+
+
+<hr class="section-divider">
+
+<!-- Skills -->
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-container">
+    <div class="skill-card">
+      <div class="skill-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML">
+        <p>HTML</p>
+      </div>
+      <div class="skill-desc">
+        Created structured web pages for projects.
+        Built semantic layouts for better SEO.
+        Integrated forms and inputs for user interaction.
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS">
+        <p>CSS</p>
+      </div>
+      <div class="skill-desc">
+        Styled web pages with responsive designs.
+        Used Flexbox and Grid for layouts.
+        Added hover and animation effects.
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/919/919828.png" alt="JavaScript">
+        <p>JavaScript</p>
+      </div>
+      <div class="skill-desc">
+        Added interactivity and form validations.
+        Manipulated DOM elements dynamically.
+        Integrated API calls for projects.
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java">
+        <p>Java</p>
+      </div>
+      <div class="skill-desc">
+        Developed desktop applications using Swing.
+        Implemented object-oriented programming concepts.
+        Connected applications with MySQL databases.
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/919/919836.png" alt="MySQL">
+        <p>MySQL</p>
+      </div>
+      <div class="skill-desc">
+        Designed relational databases for projects.
+        Wrote queries to fetch and update data.
+        Integrated database with Java and web apps.
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Git">
+        <p>Git</p>
+      </div>
+      <div class="skill-desc">
+        Managed version control for projects.
+        Collaborated with team using GitHub.
+        Handled branches, merges, and commits.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Projects -->
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="project-section">
+    <div class="project-card">
+      <img src="https://png.pngtree.com/background/20230612/original/pngtree-field-showing-green-crops-in-the-twilight-picture-image_3188247.jpg" alt="Concealed Crop">
+      <div class="content">
+        <h3>Concealed Crop Detection</h3>
+        <p>Detect concealed crops using image processing and machine learning.</p>
+        <p><strong>Tech Stack:</strong> Python, OpenCV, ML</p>
+       
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="https://i.ytimg.com/vi/nu4R8_p09Rk/hqdefault.jpg" alt="Human Detection">
+      <div class="content">
+        <h3>Human Detection Project</h3>
+        <p>Detect and count humans in images and videos using deep learning.</p>
+        <p><strong>Tech Stack:</strong> Python, OpenCV, TensorFlow</p>
+      
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.gzIUBSnmIkPuQYER_DJSVQHaHa?pid=Api&P=0&h=180" alt="Student Result">
+      <div class="content">
+        <h3>Student Result Management</h3>
+        <p>Desktop application for managing student results using Swing and MySQL.</p>
+        <p><strong>Tech Stack:</strong> Java, Swing, MySQL</p>
+        <a href="https://github.com/Kavya-hn/StudentResultSystem">GitHub →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="C:\DLithe\portfolio\news.jpeg" alt="News Portal">
+      <div class="content">
+        <h3>News Portal</h3>
+        <p>Web app for reading, posting, and managing news articles.</p>
+        <p><strong>Tech Stack:</strong> HTML, CSS, JS</p>
+        <a href="C:\DLithe\news\index.html">GitHub →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="C:\DLithe\portfolio\travel.jpeg" alt="Travel Website">
+      <div class="content">
+        <h3>Travel Website</h3>
+        <p>Web application for exploring travel destinations, booking, and reviews.</p>
+        <p><strong>Tech Stack:</strong> HTML, CSS, JS</p>
+        <a href="C:\DLithe\website\index.html">GitHub →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <img src="https://img.lovepik.com/background/20211021/large/lovepik-geometric-gradual-change-background-image_400149295.jpg" alt="Portfolio Website">
+      <div class="content">
+        <h3>Portfolio Website</h3>
+        <p>My personal portfolio website showing projects and skills.</p>
+        <p><strong>Tech Stack:</strong> HTML, CSS, JS</p>
+        <a href="https://kavya-hn.github.io/portfolio/">GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<footer id="contact">
+  <h2>Connect With Me</h2>
+  <table style="width:100%; max-width:800px; margin:auto; border-collapse: collapse;">
+    <tr>
+      <!-- Contact Links -->
+     <td style="vertical-align: top; width: 40%; padding: 20px;">
+  <div class="social-icons" style="display: flex; flex-direction: column; gap: 15px;">
+    <a href="https://github.com/Kavya-hn" target="_blank">
+      <i class="fab fa-github" style="margin-right:8px;"></i> GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/kavya-hn-281360245/" target="_blank">
+      <i class="fab fa-linkedin" style="margin-right:8px;"></i> LinkedIn
+    </a>
+    <a href="mailto:kavyakavyahn8@gmail.com">
+      <i class="fas fa-envelope" style="margin-right:8px;"></i> Email
+    </a>
+  </div>
+</td>
+
+
+      <!-- Message Form -->
+      <td style="vertical-align: top; width: 60%; padding: 20px;">
+        <div class="contact-form" style="display: flex; flex-direction: column; gap: 10px;">
+         <form class="contact-form" action="#" method="post">
+  <input type="text" placeholder="Your Name">
+  <input type="email" placeholder="Your Email">
+  <textarea placeholder="Your Message"></textarea>
+  <button type="submit">Send Message</button>
+</form>
+
+        </div>
+      </td>
+    </tr>
+  </table>
+  <p style="text-align:center; margin-top:20px;">&copy; 2025 Kavya H N. All rights reserved.</p>
+</footer>
+
+
+<script>
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('header nav');
+hamburger.addEventListener('click', () => nav.classList.toggle('show'));
+
+// Skills animation for new skill cards
+const skillCards = document.querySelectorAll('.skill-card');
+const skillsObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show'); // triggers CSS opacity & transform
+    }
+  });
+},{ threshold:0.3 });
+
+skillCards.forEach(card => skillsObserver.observe(card));
+
+// Projects animation
+const projectCards = document.querySelectorAll('.project-card');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('show'); }
+  });
+},{ threshold:0.3 });
+projectCards.forEach(card => observer.observe(card));
+
+// HR divider scroll animation
+const divider = document.querySelector('.section-divider');
+const dividerObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+},{ threshold: 0.3 });
+dividerObserver.observe(divider);
+
+</script>
+</body>
+</html>
