@@ -16,19 +16,122 @@ html { scroll-behavior:smooth; }
 body { font-family: 'Roboto', sans-serif; line-height:1.6; background:#121212; color:#eee; }
 
 /* ===== Header ===== */
+/* Default header (desktop/laptop) */
 header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:20px; background:#1f1f1f; color:white; position:fixed; width:100%; top:0; z-index:1000;
+  display:flex; 
+  justify-content:space-between; 
+  align-items:center;
+  padding:20px; 
+  background:#1f1f1f; 
+  color:white; 
+  position:fixed; 
+  width:100%; 
+  top:0; 
+  z-index:1000;
 }
-header .logo { font-size:28px; font-weight:bold; cursor:pointer; }
-header nav { display:flex; gap:20px; }
-header nav a { color:white; text-decoration:none; font-weight:500; transition:0.3s; }
-header nav a:hover { color:#f97316; }
-.hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
-.hamburger div { width:25px; height:3px; background:white; transition:0.3s; }
+
+header .logo {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  gap: 10px; /* space between image and text */
+}
+
+header .logo .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;  /* circular */
+  object-fit: cover;
+  border: 2px solid #f97316;
+}
+
+/* Smaller avatar on mobile */
+@media(max-width:768px){
+  header .logo .avatar {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+header nav {
+  display:flex; 
+  gap:20px;
+}
+
+header nav a {
+  color:white; 
+  text-decoration:none; 
+  font-weight:500; 
+  transition:0.3s;
+}
+
+header nav a:hover {
+  color:#f97316;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display:none; /* only show on mobile */
+  flex-direction:column; 
+  cursor:pointer; 
+  gap:5px;
+}
+
+.hamburger div {
+  width:25px; 
+  height:3px; 
+  background:white; 
+  transition:0.3s;
+}
+
+/* ===== Responsive Header ===== */
+@media(max-width:768px){
+  /* Hide nav by default */
+  header nav {
+    display:none;
+    position:absolute;
+    top:70px; 
+    right:20px;
+    background:#1f1f1f;
+    flex-direction:column;
+    gap:15px;
+    padding:15px 20px;
+    border-radius:10px;
+    width:calc(100% - 40px); /* responsive width */
+    max-width:300px;          /* optional limit */
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  /* Show nav when hamburger clicked */
+  header nav.show {
+    display:flex;
+  }
+
+  .hamburger {
+    display:flex; /* show hamburger on small screens */
+  }
+  
+  /* Optional: make links bigger on mobile */
+  header nav a {
+    font-size:18px;
+    padding:5px 0;
+  }
+}
+
+@media(max-width:1024px){
+  #about {
+    flex-direction: column; /* stack image and text on tablets */
+    gap: 30px;
+  }
+}
+
 @media(max-width:768px){
   #about .text { text-align:center; }
+  #about .image img { max-width: 100%; height: auto; }
 }
+
 
 /* ===== Sections ===== */
 section { padding:100px 20px 60px; min-height:100vh; }
@@ -122,7 +225,8 @@ section h2 { font-size:36px; text-align:center; margin-bottom:30px; color:#f9731
   border-radius: 12px;
   padding: 20px;
   text-align: center;
-  width: 220px;        /* increased width */
+  max-width: 220px; 
+  width:100%;       /* increased width */
   height: auto;        /* let height adjust */
   box-shadow: 0 0 10px rgba(249,115,22,0.3);
   opacity: 0; 
@@ -139,7 +243,8 @@ section h2 { font-size:36px; text-align:center; margin-bottom:30px; color:#f9731
 }
 
 .skill-icon img {
-  width: 50px;
+  width:100%;
+  max-width: 50px;
   margin-bottom: 10px;
 }
 
@@ -161,7 +266,8 @@ section h2 { font-size:36px; text-align:center; margin-bottom:30px; color:#f9731
   margin: 0;
   font-weight: bold;
   color: #f97316;
-   width: 120px;
+   max-width: 120px;
+   width:100%;
   text-align: center;
   align-self: center; 
 }
@@ -206,9 +312,12 @@ section h2 { font-size:36px; text-align:center; margin-bottom:30px; color:#f9731
 }
 
 .skill-card img {
-  width: 50px;
+  width: 100%;
+  max-width:50px;
   margin-bottom: 10px;
 }
+
+
 
 .skill-card p {
   margin: 0;
@@ -226,6 +335,28 @@ section h2 { font-size:36px; text-align:center; margin-bottom:30px; color:#f9731
 .project-card .content p { margin-bottom:10px; }
 .project-card .content a { color:#f97316; text-decoration:none; font-weight:bold; }
 .project-card.show { opacity:1; transform:translateY(0); }
+@media(max-width:480px){
+  .project-card {
+    flex-direction: column; /* stack image and text */
+    gap: 15px;              /* smaller gap */
+    align-items: center;    /* center content */
+  }
+
+  .project-card img {
+    width: 100%;        /* full width of container */
+    max-width: 300px;   /* don't exceed original size on bigger screens */
+    height: auto;       /* maintain aspect ratio */
+  }
+
+  .project-card .content {
+    width: 100%;        /* ensure text container fits */
+    text-align: center; /* center text for small screens */
+  }
+    .project-section {
+    gap: 30px; /* smaller vertical gap between cards */
+  }
+}
+
 
 /* ===== Contact ===== */
 footer {
@@ -287,13 +418,23 @@ footer p {
   header nav.show{ display:flex; }
   .hamburger{ display:flex; }
 }
+@media (max-width: 1024px) {
+  .skills-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 per row for smaller laptops */
+  }
+}
+
 </style>
 </head>
 <body>
 
 <!-- Header -->
 <header>
-  <div class="logo">Kavya H N</div>
+  <div class="logo">
+  <img src="E:\portfolio\kavyahn.jpg" alt="Kavya H N" class="avatar">
+  Kavya H N
+</div>
+
   <nav>
     <a href="#about">About</a>
     <a href="#education">Education</a>
@@ -460,7 +601,7 @@ footer p {
       </div>
     </div>
     <div class="project-card">
-      <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ-JKrBXGea6BNh-PrG9Tv85p1kK_2q0HNbaBhTx4MfKw4TJxDj" alt="News Portal">
+      <img src="https://www.bnmit.org/wp-content/uploads/2020/09/news-636978_960_720.jpg" alt="News Portal">
       <div class="content">
         <h3>News Portal</h3>
         <p>Web app for reading, posting, and managing news articles.</p>
@@ -469,7 +610,7 @@ footer p {
       </div>
     </div>
     <div class="project-card">
-      <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGFuFqZanVc0ahF3_a2589ERdrb6RH8hsvPraan0ll1l6xoXYT" alt="Travel Website">
+      <img src="https://www.stahl.com/_ipx/q_85&fit_inside&w_3072&f_jpeg/https://cms.stahl.com/assets/imported/stahl-neo-sustainable-leather-chemicals.jpg" alt="Travel Website">
       <div class="content">
         <h3>Travel Website</h3>
         <p>Web application for exploring travel destinations, booking, and reviews.</p>
@@ -532,7 +673,11 @@ footer p {
 // Hamburger menu
 const hamburger = document.getElementById('hamburger');
 const nav = document.querySelector('header nav');
-hamburger.addEventListener('click', () => nav.classList.toggle('show'));
+
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('show');
+});
+
 
 // Skills animation for new skill cards
 const skillCards = document.querySelectorAll('.skill-card');
@@ -568,4 +713,4 @@ dividerObserver.observe(divider);
 
 </script>
 </body>
-</html>
+</html>  this is fine but should i add my photo 
